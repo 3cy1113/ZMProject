@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import $ from 'jquery'
 import store from './vuex/'
 import App from './App'
 import Bus from './utils/bus'
@@ -10,11 +11,10 @@ import lodash from 'lodash'
 import moment from 'moment'
 import accounting from 'accounting'
 import lockr from 'lockr'
-import 'viewerjs/dist/viewer.css'
-import Viewer from 'v-viewer'
+import bootstrap from 'bootstrap/dist/js/bootstrap.min.js'
+
+//import 'viewerjs/dist/viewer.css'
 //引入UI组件
-import iView from 'iview'
-import locale from 'iview/dist/locale/zh-CN'
 //引入自定义组件
 //加载自定义工具模块
 import appConfig from './utils/config'
@@ -23,21 +23,22 @@ import ServiceRequest from './utils/service'
 import Consts from './utils/consts'
 import './utils/filters'
 //引入样式文件
-import 'element-ui/lib/theme-chalk/index.css'
 //router引用必须放在最后,否则会引发样式问题.
 import router from './router'
-Vue.use(iView,{
+/*Vue.use(iView,{
   locale,
   transfer: true,
   size: 'default'
 });
-Vue.use(Viewer);
+Vue.use(Viewer);*/
 Vue.config.productionTip = false;
 Vue.prototype.axios = axios;
 window.appConfig=Vue.prototype.appConfig = appConfig;
 window.moment=Vue.prototype.moment=moment;
 Vue.prototype.accounting=accounting;
 Vue.prototype.lockr=lockr;
+///window.bootstrap=Vue.prototype.bootstrap=bootstrap;
+window.$=Vue.prototype.$=$;
 window.Bus=Vue.prototype.$bus=Bus;
 window.util=Vue.prototype.util=util;
 window.Consts=Consts;
@@ -59,6 +60,7 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
   el: '#app',
+  $,
   router,
   store,
   template: '<App/>',
